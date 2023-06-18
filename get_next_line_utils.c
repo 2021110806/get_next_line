@@ -1,11 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minjeon2 <minjeon2@student.42seoul.>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/18 23:32:07 by minjeon2          #+#    #+#             */
+/*   Updated: 2023/06/18 23:32:09 by minjeon2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s, int	only_null)
 {
 	size_t	return_value;
 
 	return_value = 0;
-	while (*s)
+	if (only_null)
+	{
+		while (s && *s)
+		{
+			return_value++;
+			s++;
+		}
+		return (return_value);
+	}
+	while (s && (*s || *s == '\n'))
 	{
 		return_value++;
 		s++;
@@ -13,7 +34,17 @@ size_t	ft_strlen(const char *s)
 	return (return_value);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	*free_ptr(char **ptr)
+{
+	if (*ptr != 0)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return ((void *) 0);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		s1_len;
 	int		s2_len;
@@ -23,8 +54,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	s_i = 0;
 	return_value_i = 0;
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
+	s1_len = ft_strlen(s1, 1);
+	s2_len = ft_strlen(s2, 1);
 	return_value = (char *) malloc (sizeof (char) * (s1_len + s2_len) + 1);
 	if (!return_value)
 		return ((void *)0);
@@ -40,21 +71,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return_value[return_value_i] = '\0';
 	return (return_value);
 }
-
-char	*change_nl_to_null(char *buf)
-{
-	int	idx;
-
-	idx = 0;
-	while (buf[idx])
-	{
-		if (buf[idx] == '\n')
-			buf[idx] = '\0';
-		idx++;
-	}
-	return buf;
-}
-
 char	*ft_strdup(const char *s1)
 {
 	char	*copy;
