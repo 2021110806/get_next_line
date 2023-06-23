@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjeon2 <minjeon2@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 23:32:07 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/18 23:32:09 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:54:10 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(char *s, int	only_null)
 		}
 		return (return_value);
 	}
-	while (s && (*s || *s == '\n'))
+	while (s && (*s && *s !='\n'))
 	{
 		return_value++;
 		s++;
@@ -117,25 +117,16 @@ char	*ft_strchr(const char *s, int c)
 	return (return_value);
 }
 
-/*
-int	ft_strchr(const char *s, int c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char	*return_value;
-	char	*char_s;
-	int		char_s_idx;
-	int		return_value_idx;
+	char			*return_value;
+	unsigned long	i;
 
-	char_s_idx = 0;
-	return_value_idx = 0;
-	char_s = (char *) s;
-	return_value = (void *) 0;
-	while (char_s[char_s_idx] == '\0')
-	{
-		if (char_s[char_s_idx] == (char)c)
-			return_value = char_s;
-		char_s_idx++;
-	}
-	if ((char)c == 0)
-		return (0);
-	return (char_s_idx);
-}*/
+	i = 0;
+	return_value = (char *) malloc (sizeof (char) * count * size);
+	if (!return_value)
+		return ((void *)0);
+	while (i < count * size)
+		return_value[i++] = 0;
+	return ((void *)return_value);
+}
