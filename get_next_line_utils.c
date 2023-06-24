@@ -6,13 +6,13 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 23:32:07 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/24 21:13:17 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:51:41 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s, int	only_null)
+size_t	ft_strlen(char *s, int only_null)
 {
 	size_t	return_value;
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(char *s, int	only_null)
 		}
 		return (return_value);
 	}
-	while (s && (*s && *s !='\n'))
+	while (s && (*s && *s != '\n'))
 	{
 		return_value++;
 		s++;
@@ -34,14 +34,24 @@ size_t	ft_strlen(char *s, int	only_null)
 	return (return_value);
 }
 
-void	*free_ptr(char **ptr)
+void	*free_ptr(char **ptr, char **return_value, int free_num)
 {
+	if (free_num == 1)
+	{
+		if (*ptr != 0)
+		{
+			free(*ptr);
+			*ptr = NULL;
+		}
+		return ((void *) 0);
+	}
 	if (*ptr != 0)
 	{
 		free(*ptr);
 		*ptr = NULL;
 	}
-	return ((void *) 0);
+	free(*return_value);
+	return ((void *)0);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -71,6 +81,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return_value[return_value_i] = '\0';
 	return (return_value);
 }
+
 char	*ft_strdup(const char *s1)
 {
 	char	*copy;
@@ -79,7 +90,7 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	len = 0;
-	i = 0; 
+	i = 0;
 	while (s1[len])
 		len++;
 	copy = (char *) malloc (len * sizeof (char) + 1);
@@ -96,13 +107,14 @@ char	*ft_strdup(const char *s1)
 	*copy = '\0';
 	return (ret);
 }
+
 int	ft_strchr(const char *s, int c)
 {
-	int	return_value;
+	int		return_value;
 	char	*char_s;
 
 	char_s = (char *) s;
-	return_value =  0;
+	return_value = 0;
 	while (*char_s != '\0')
 	{
 		if (*char_s == (char)c)
