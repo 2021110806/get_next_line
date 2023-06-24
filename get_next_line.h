@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:06:34 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/23 20:20:59 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:43:41 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+int	is_invalid_input(int fd, char buf[], char **backup, int *readsize);
+int	make_new_backup(char **new_backup, char **backup, char **return_value);
 size_t	ft_strlen(char *s, int	only_null);
 char	*get_next_line(int fd);
-char	*change_nl_to_null(char *buf);
+int	join_backup_and_buf(char **backup, char buf[]);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
-char	*ft_strchr(const char *s, int c);
+int		ft_strchr(const char *s, int c);
 void	*free_ptr(char **ptr);
 int		copy_to_return(char **backup, char **return_value, int readsize);

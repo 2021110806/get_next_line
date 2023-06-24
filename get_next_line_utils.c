@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 23:32:07 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/23 19:54:10 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:50:42 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,37 +96,23 @@ char	*ft_strdup(const char *s1)
 	*copy = '\0';
 	return (ret);
 }
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
-	char	*return_value;
+	int	return_value;
 	char	*char_s;
 
 	char_s = (char *) s;
-	return_value = (void *) 0;
+	return_value =  0;
 	while (*char_s != '\0')
 	{
 		if (*char_s == (char)c)
 		{
-			return_value = char_s;
+			return_value = 1;
 			break ;
 		}
 		char_s++;
 	}
 	if ((char)c == 0)
-		return (char_s);
+		return (0);
 	return (return_value);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	char			*return_value;
-	unsigned long	i;
-
-	i = 0;
-	return_value = (char *) malloc (sizeof (char) * count * size);
-	if (!return_value)
-		return ((void *)0);
-	while (i < count * size)
-		return_value[i++] = 0;
-	return ((void *)return_value);
 }
