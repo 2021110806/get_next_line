@@ -6,19 +6,19 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:06:34 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/24 17:43:41 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:21:03 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
+#  define BUFFER_SIZE 1
 # endif
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 
 int	is_invalid_input(int fd, char buf[], char **backup, int *readsize);
-int	make_new_backup(char **new_backup, char **backup, char **return_value);
+int	make_new_backup(char **new_backup, char **backup);
 size_t	ft_strlen(char *s, int	only_null);
 char	*get_next_line(int fd);
 int	join_backup_and_buf(char **backup, char buf[]);

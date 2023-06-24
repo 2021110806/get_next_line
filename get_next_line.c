@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:00:26 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/24 18:40:45 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:22:38 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,12 @@ int	copy_to_return(char **backup, char **return_value, int readsize)
 	return (1);
 }
 
-int	make_new_backup(char **new_backup, char **backup, char **return_value)
+int	make_new_backup(char **new_backup, char **backup)
 {
 	int	new_backup_idx;
 	int	backup_idx;
 	int	backup_len;
 
-	if (!new_backup)
-	{
-		free (*return_value);
-		free_ptr(backup);
-		return (0);
-	}
 	new_backup_idx = 0;
 	backup_idx = ft_strlen(*backup, 0) + 1;
 	backup_len = ft_strlen(*backup, 1);
@@ -131,23 +125,25 @@ char	*get_next_line(int fd)
 		buf[readsize] = 0;
 		if (!join_backup_and_buf(&backup, buf))
 			return ((void *)0);
-		if (ft_strchr(backup, '\n') || (readsize == 0))
+		if (ft_strchr(backup, '\n'))
 			break ;
 		readsize = read(fd, buf, BUFFER_SIZE);
 	}
 	return_value = malloc (sizeof(char) * ft_strlen(backup, 0) + ft_strchr(backup, '\n') + 1) ;
 	if (!copy_to_return(&backup, &return_value, readsize))
 		return ((void *)0);
-	new_backup = malloc (sizeof (char) * \
-	(ft_strlen(backup, 1) - ft_strlen(backup, 0)));
+	new_backup = malloc (sizeof (char) * (ft_strlen(backup, 1) - ft_strlen(backup, 0)));
 	if (!new_backup)
 	{
-		free(return_value);
+		free (return_value);
+		free (new_backup);
 		free_ptr(&backup);
-		return ((void *)0);
+		return (0);
 	}
-	if (!make_new_backup(&new_backup, &backup, &return_value))
+	if (!make_new_backup(&new_backup, &backup))
 		return ((void *)0);
+	if (!(*backup))
+		free_ptr(&backup);
 	//printf("!");
 	return (return_value);
 }

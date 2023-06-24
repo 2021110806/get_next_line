@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 23:32:07 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/06/24 17:50:42 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:13:17 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	len = 0;
-	i = 0;
+	i = 0; 
 	while (s1[len])
 		len++;
 	copy = (char *) malloc (len * sizeof (char) + 1);
